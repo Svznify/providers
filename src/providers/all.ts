@@ -20,6 +20,12 @@ import { tugaflixScraper } from '@/providers/sources/tugaflix';
 import { vidsrcsuScraper } from '@/providers/sources/vidsrcsu';
 
 import {
+  oneServerAutoembedEmbed,
+  oneServerEmbedsuEmbed,
+  oneServerTwoEmbedEmbed,
+  oneServerVidsrcsuEmbed,
+} from './embeds/1stream';
+import {
   autoembedBengaliScraper,
   autoembedEnglishScraper,
   autoembedHindiScraper,
@@ -60,6 +66,7 @@ import { warezcdnembedMp4Scraper } from './embeds/warezcdn/mp4';
 import { warezPlayerScraper } from './embeds/warezcdn/warezplayer';
 import { webtor1080Scraper, webtor480Scraper, webtor4kScraper, webtor720Scraper } from './embeds/webtor';
 import { xprimeApolloEmbed, xprimeFoxEmbed, xprimeMarantEmbed, xprimeStreamboxEmbed } from './embeds/xprime';
+import { oneServerScraper } from './sources/1server';
 import { EightStreamScraper } from './sources/8stream';
 import { coitusScraper } from './sources/coitus';
 import { ConsumetScraper } from './sources/consumet';
@@ -109,6 +116,7 @@ export function gatherAllSources(): Array<Sourcerer> {
     xprimeScraper,
     ConsumetScraper,
     hianimeScraper,
+    oneServerScraper,
   ];
 }
 
@@ -166,5 +174,9 @@ export function gatherAllEmbeds(): Array<Embed> {
     hianimeHd2DubEmbed,
     hianimeHd1SubEmbed,
     hianimeHd2SubEmbed,
+    oneServerAutoembedEmbed,
+    oneServerEmbedsuEmbed,
+    oneServerVidsrcsuEmbed,
+    oneServerTwoEmbedEmbed,
   ];
 }
