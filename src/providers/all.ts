@@ -24,7 +24,7 @@ import {
   oneServerEmbedsuEmbed,
   oneServerTwoEmbedEmbed,
   oneServerVidsrcsuEmbed,
-} from './embeds/1stream';
+} from './embeds/1server';
 import {
   autoembedBengaliScraper,
   autoembedEnglishScraper,

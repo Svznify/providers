@@ -5,7 +5,7 @@ import {
   oneServerEmbedsuEmbed,
   oneServerTwoEmbedEmbed,
   oneServerVidsrcsuEmbed,
-} from '@/providers/embeds/1stream';
+} from '@/providers/embeds/1server';
 import {
   ConsumetStreamSBScraper,
   ConsumetStreamTapeScraper,

@@ -81,7 +81,7 @@ function processProxiedURL(url: string): string {
 export const oneServerAutoembedEmbed = makeEmbed({
   id: '1server-autoembed',
   name: 'Autoembed',
-  rank: 261,
+  rank: 264,
   async scrape(ctx): Promise<EmbedOutput> {
     const query = JSON.parse(ctx.url);
 
@@ -119,7 +119,7 @@ export const oneServerAutoembedEmbed = makeEmbed({
 
 export const oneServerEmbedsuEmbed = makeEmbed({
   id: '1server-embedsu',
-  name: 'embed.su',
+  name: 'Embed.su',
   rank: 262,
   async scrape(ctx): Promise<EmbedOutput> {
     const query = JSON.parse(ctx.url);
@@ -160,7 +160,7 @@ export const oneServerEmbedsuEmbed = makeEmbed({
 
 export const oneServerVidsrcsuEmbed = makeEmbed({
   id: '1server-vidsrcsu',
-  name: 'vidsrc.su',
+  name: 'Vidsrc.su',
   rank: 263,
   async scrape(ctx): Promise<EmbedOutput> {
     const query = JSON.parse(ctx.url);
@@ -207,7 +207,7 @@ export const oneServerVidsrcsuEmbed = makeEmbed({
 export const oneServerTwoEmbedEmbed = makeEmbed({
   id: '1server-2embed',
   name: '2Embed',
-  rank: 264,
+  rank: 261,
   async scrape(ctx): Promise<EmbedOutput> {
     const query = JSON.parse(ctx.url);
 
