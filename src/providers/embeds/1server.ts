@@ -44,7 +44,7 @@ function createProxyUrl(originalUrl: string, referer: string): string {
     }),
   );
 
-  return `https://proxy.fifthwit.net/m3u8-proxy?url=${encodedUrl}&headers=${encodedHeaders}`;
+  return `https://proxys.ciphertv.dev/proxy?url=${encodedUrl}&headers=${encodedHeaders}`;
 }
 
 function processProxiedURL(url: string): string {
@@ -234,7 +234,7 @@ export const oneServerTwoEmbedEmbed = makeEmbed({
         {
           id: 'primary',
           type: 'hls',
-          playlist: `https://proxy.fifthwit.net/m3u8-proxy?url=${encodeURIComponent(response[0].source.files[0].file)}&headers=${encodeURIComponent(JSON.stringify({ referer: 'https://uqloads.xyz/', origin: 'https://uqloads.xyz' }))}`,
+          playlist: `https://proxys.ciphertv.dev/proxy?url=${encodeURIComponent(response[0].source.files[0].file)}&headers=${encodeURIComponent(JSON.stringify({ referer: 'https://uqloads.xyz/', origin: 'https://uqloads.xyz' }))}`,
           flags: [flags.CORS_ALLOWED],
           captions,
         },
