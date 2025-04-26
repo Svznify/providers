@@ -30,6 +30,14 @@ async function comboScraper(ctx: ShowScrapeContext | MovieScrapeContext): Promis
       embedId: '1server-2embed',
       url: JSON.stringify(query),
     },
+    {
+      embedId: '1server-primebox',
+      url: JSON.stringify(query),
+    },
+    {
+      embedId: '1server-foxstream',
+      url: JSON.stringify(query),
+    },
   ];
 
   return { embeds };

@@ -88,7 +88,7 @@ export const oneServerAutoembedEmbed = makeEmbed({
     const apiUrl =
       query.type === 'movie'
         ? `${baseUrl}/movie/autoembed/${query.tmdbId}`
-        : `${baseUrl}/tv/autoembed/${query.tmdbId}?s=${query.season}&e=${query.episode}`;
+        : `${baseUrl}/tv/autoembed/${query.tmdbId}/${query.season}/${query.episode}`;
 
     const response = await ctx.fetcher(apiUrl);
     if (!response) throw new NotFoundError('No response received');
@@ -127,7 +127,7 @@ export const oneServerEmbedsuEmbed = makeEmbed({
     const apiUrl =
       query.type === 'movie'
         ? `${baseUrl}/movie/embedsu/${query.tmdbId}`
-        : `${baseUrl}/tv/embedsu/${query.tmdbId}?s=${query.season}&e=${query.episode}`;
+        : `${baseUrl}/tv/embedsu/${query.tmdbId}/${query.season}/${query.episode}`;
 
     const response = await ctx.fetcher(apiUrl);
     if (!response) throw new NotFoundError('No response received');
@@ -168,7 +168,7 @@ export const oneServerVidsrcsuEmbed = makeEmbed({
     const apiUrl =
       query.type === 'movie'
         ? `${baseUrl}/movie/vidsrcsu/${query.tmdbId}`
-        : `${baseUrl}/tv/vidsrcsu/${query.tmdbId}?s=${query.season}&e=${query.episode}`;
+        : `${baseUrl}/tv/vidsrcsu/${query.tmdbId}/${query.season}/${query.episode}`;
 
     const response = await ctx.fetcher(apiUrl);
     if (!response) throw new NotFoundError('No response received');
@@ -214,7 +214,7 @@ export const oneServerTwoEmbedEmbed = makeEmbed({
     const apiUrl =
       query.type === 'movie'
         ? `${baseUrl}/movie/2embed/${query.tmdbId}`
-        : `${baseUrl}/tv/2embed/${query.tmdbId}?s=${query.season}&e=${query.episode}`;
+        : `${baseUrl}/tv/2embed/${query.tmdbId}/${query.season}/${query.episode}`;
 
     const response = await ctx.fetcher(apiUrl);
     if (!response) throw new NotFoundError('No response received');
@@ -235,6 +235,121 @@ export const oneServerTwoEmbedEmbed = makeEmbed({
           id: 'primary',
           type: 'hls',
           playlist: `https://proxys.ciphertv.dev/proxy?url=${encodeURIComponent(response[0].source.files[0].file)}&headers=${encodeURIComponent(JSON.stringify({ referer: 'https://uqloads.xyz/', origin: 'https://uqloads.xyz' }))}`,
+          flags: [flags.CORS_ALLOWED],
+          captions,
+        },
+      ],
+    };
+  },
+});
+
+export const oneServerPrimeboxEmbed = makeEmbed({
+  id: '1server-primebox',
+  name: 'Primebox',
+  rank: 260,
+  async scrape(ctx): Promise<EmbedOutput> {
+    const query = JSON.parse(ctx.url);
+
+    const apiUrl =
+      query.type === 'movie'
+        ? `${baseUrl}/movie/primebox/${query.tmdbId}`
+        : `${baseUrl}/tv/primebox/${query.tmdbId}/${query.season}/${query.episode}`;
+
+    const response = await ctx.fetcher(apiUrl);
+    if (!response) throw new NotFoundError('No response received');
+    if (!response[0]?.source?.files?.[0]?.file) throw new NotFoundError('No stream URL found in response');
+
+    const captions =
+      response[0].source.subtitles?.map((sub: { url: string; lang: string; type: string }) => ({
+        type: sub.type,
+        url: sub.url,
+        language: languageMap[sub.lang.toLowerCase()] || 'unknown',
+      })) || [];
+
+    ctx.progress(90);
+
+    return {
+      stream: [
+        {
+          id: 'primary',
+          type: 'hls',
+          playlist: response[0].source.files[0].file,
+          flags: [flags.CORS_ALLOWED],
+          captions,
+        },
+      ],
+    };
+  },
+});
+
+export const oneServerFoxstreamEmbed = makeEmbed({
+  id: '1server-foxstream',
+  name: 'Foxstream',
+  rank: 259,
+  async scrape(ctx): Promise<EmbedOutput> {
+    const query = JSON.parse(ctx.url);
+
+    const apiUrl =
+      query.type === 'movie'
+        ? `${baseUrl}/movie/foxstream/${query.tmdbId}`
+        : `${baseUrl}/tv/foxstream/${query.tmdbId}/${query.season}/${query.episode}`;
+
+    const response = await ctx.fetcher(apiUrl);
+    if (!response) throw new NotFoundError('No response received');
+    if (!response[0]?.source?.files?.[0]?.file) throw new NotFoundError('No stream URL found in response');
+
+    const captions =
+      response[0].source.subtitles?.map((sub: { url: string; lang: string; type: string }) => ({
+        type: sub.type,
+        url: sub.url,
+        language: languageMap[sub.lang.toLowerCase()] || 'unknown',
+      })) || [];
+
+    ctx.progress(90);
+
+    return {
+      stream: [
+        {
+          id: 'primary',
+          type: 'hls',
+          playlist: processProxiedURL(response[0].source.files[0].file),
+          flags: [flags.CORS_ALLOWED],
+          captions,
+        },
+      ],
+    };
+  },
+});
+
+export const oneServerAnizoneEmbed = makeEmbed({
+  id: '1server-anizone',
+  name: 'Anizone',
+  rank: 256,
+  async scrape(ctx): Promise<EmbedOutput> {
+    const query = JSON.parse(ctx.url);
+    const apiUrl = query.episode 
+      ? `${baseUrl}/anime/anizone/${query.anilistId}/${query.episode}`
+      : `${baseUrl}/anime/anizone/${query.anilistId}`;
+
+    const response = await ctx.fetcher(apiUrl);
+    if (!response) throw new NotFoundError('No response received');
+    if (!response[0]?.source?.files?.[0]?.file) throw new NotFoundError('No stream URL found in response');
+
+    const captions =
+      response[0].source.subtitles?.map((sub: { url: string; lang: string; type: string }) => ({
+        type: sub.type,
+        url: sub.url,
+        language: languageMap[sub.lang.toLowerCase()] || 'unknown',
+      })) || [];
+
+    ctx.progress(90);
+
+    return {
+      stream: [
+        {
+          id: 'primary',
+          type: 'hls',
+          playlist: processProxiedURL(response[0].source.files[0].file),
           flags: [flags.CORS_ALLOWED],
           captions,
         },

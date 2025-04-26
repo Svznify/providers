@@ -5,6 +5,8 @@ import {
   oneServerEmbedsuEmbed,
   oneServerTwoEmbedEmbed,
   oneServerVidsrcsuEmbed,
+  oneServerPrimeboxEmbed,
+  oneServerFoxstreamEmbed,
 } from '@/providers/embeds/1server';
 import {
   ConsumetStreamSBScraper,
@@ -54,6 +56,8 @@ const SKIP_VALIDATION_CHECK_IDS = [
   oneServerEmbedsuEmbed.id,
   oneServerVidsrcsuEmbed.id,
   oneServerTwoEmbedEmbed.id,
+  oneServerPrimeboxEmbed.id,
+  oneServerFoxstreamEmbed.id,
 ];
 
 export function isValidStream(stream: Stream | undefined): boolean {

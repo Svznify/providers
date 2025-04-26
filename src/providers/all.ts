@@ -24,6 +24,8 @@ import {
   oneServerEmbedsuEmbed,
   oneServerTwoEmbedEmbed,
   oneServerVidsrcsuEmbed,
+  oneServerPrimeboxEmbed,
+  oneServerFoxstreamEmbed,
 } from './embeds/1server';
 import {
   autoembedBengaliScraper,
@@ -178,5 +180,7 @@ export function gatherAllEmbeds(): Array<Embed> {
     oneServerEmbedsuEmbed,
     oneServerVidsrcsuEmbed,
     oneServerTwoEmbedEmbed,
+    oneServerPrimeboxEmbed,
+    oneServerFoxstreamEmbed,
   ];
 }
